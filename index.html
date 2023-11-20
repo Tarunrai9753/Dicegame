@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <style>
+        .container {
+            margin: auto;
+            text-align: center;
+        }
+
+        .dice {
+            /* text-align: center;
+        display: inline-block; */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        body {
+            background-image: url(./images/dicbg.jpg);
+            background-size: cover;
+
+        }
+
+        #h1 {
+            font-family: "Lobster", cursive;
+            text-shadow: 5px 0 #232931;
+            font-size: 4.5rem;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .p1 {
+            /* float: left; */
+            font-size: 2rem;
+            color: aliceblue;
+            border: 2px;
+            border-style: solid;
+            border-radius: 10px;
+            padding: 25px;
+            font-family: "Indie Flower", cursive;
+            /* margin-left: 18%; */
+        }
+
+        .p1:hover {
+
+            background-color: #232931;
+            color: white;
+            border: 2px solid white;
+
+        }
+
+        .p2 {
+
+            /* float: right; */
+            font-size: 2rem;
+            color: aliceblue;
+            border: 2px;
+            border-style: solid;
+            padding: 25px;
+            font-family: "Indie Flower", cursive;
+            border-radius: 10px;
+            /* margin-left: 38%; */
+        }
+
+        .p2:hover {
+            background-color: #232931;
+            color: white;
+            border: 2px solid white;
+
+        }
+
+
+        .img1 {
+            height: 20%;
+            width: 16%;
+            /* margin-left: 16%; */
+            /* animation: mymove 5s infinite */
+        }
+
+        /* @keyframes mymove {
+       50% {transform: rotate(180deg);}
+} */
+
+
+        .img2 {
+            height: 20%;
+            width: 16%;
+            /* margin-left: 36%; */
+
+        }
+
+        .bot {
+            padding-top: 30px;
+        }
+
+        #butn {
+            background: #000;
+            font-family: "Indie Flower", cursive;
+            border: 2px solid white;
+            border-radius: 7px;
+            color: #ffff;
+            font-size: 30px;
+            padding: 16px 25px 16px 25px;
+            text-decoration: none;
+        }
+
+        #butn:hover {
+            background: #232931;
+            text-decoration: none;
+        }
+
+        @media (min-width: 820px) {
+            body {
+                background-repeat: no-repeat;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row">
+            <h1 id="h1">Let's Play</h1>  <!--Shows the result-->
+
+            <div class="dice col-md-6 col-12"> <!--both dices for players-->
+                <img id="pdice1" class="img1" src="./images/dice6.png"> 
+                <img id="pdice2" class="img2" src="./images/dice6.png">
+            </div>
+
+            <div class="dice col-md-6 col-12"> <!--Both the players-->
+                <p id="Player1" class="p1">Player 1</p>
+                <p id="Player2" class="p2">Player 2</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container bot">
+        <div class="row">
+            <button type="button" id="butn" onClick="rolltheDice()"> <!-- For ROll The Dice -->
+                Roll the Dice
+            </button>
+        </div>
+    </div>
+    <div class="container bot">
+        <div class="row">
+            <button type="button" id="butn" onClick="Pnames()"> <!-- For Edit Names-->
+                Edit Names
+            </button>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    // Edit player name 
+    var player1 = "Player 1";
+    var player2 = "Player 2";
+    function Pnames() {
+        player1 = prompt("Enter Player1 name:"); //player 1 
+        player2 = prompt("Enter player2 name:"); //player 2
+
+        document.getElementById("Player1").innerHTML = player1;
+        document.getElementById("Player2").innerHTML = player2;
+    }
+   
+    function rolltheDice() {
+        
+        let Number1 = Math.floor(Math.random() * 6) + 1;  // start from 1 (1-6)
+        let diceimg = "dice" + Number1 + ".png";  //dice in png from 1 to 6
+        let randomimg = "images/" + diceimg; // diceimages 1-6
+        let pic1 = document.querySelectorAll("img")[0]; // selectall
+        pic1.setAttribute("src",randomimg); // set the images
+
+
+        let Number2 = Math.floor(Math.random() * 6) + 1; // for player 2
+        let diceimg2 = "images/dice" + Number2 + ".png";
+        document.querySelectorAll("img")[1].setAttribute("src",diceimg2);
+        
+
+        if (Number1 === Number2) {  // compare both the random numbers 
+            document.getElementById("h1").innerHTML = "Draw!"; 
+           
+        }
+
+        else if (Number1 < Number2) {
+            document.getElementById("h1").innerHTML = (player2 + " WINS!");
+        }
+
+        else {
+            document.getElementById("h1").innerHTML = (player1 + " WINS!");
+        }
+    }
+
+
+
+</script>
+
+</html>
